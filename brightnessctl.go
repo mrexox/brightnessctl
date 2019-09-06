@@ -9,7 +9,7 @@ import (
 const (
 	backlightDevPath = "/sys/class/backlight"
 	brightnessParam  = "brightness"
-	brightnessStep   = 500
+	brightnessStep   = 250 // fix the step for smaller changes
 )
 
 func check(err error) {
@@ -19,7 +19,10 @@ func check(err error) {
 }
 
 func getDriver(sysfsPath string) (string, error) {
-	return "intel_backlight", nil
+	files, err := ioutil.ReadDir(sysfsPath)
+	check(err)
+
+	return files[0].Name(), nil
 }
 
 func concat(strs ...string) string {

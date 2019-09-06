@@ -11,10 +11,10 @@ func main() {
 	}
 }
 
-func increase (v1 int, v2 int) int {
+func increase(v1 int, v2 int) int {
 	return v1 + v2
 }
 
-func decrease (v1 int, v2 int) int {
+func decrease(v1 int, v2 int) int {
 	return v1 - v2
 }
