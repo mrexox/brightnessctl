@@ -1,5 +1,8 @@
 package main
 
+// fix the step for smaller changes
+const brightnessStep   = 250
+
 var Side string
 
 func main() {
@@ -11,10 +14,10 @@ func main() {
 	}
 }
 
-func increase(v1 int, v2 int) int {
-	return v1 + v2
+func increase(v1 int) int {
+	return v1 + brightnessStep
 }
 
-func decrease(v1 int, v2 int) int {
-	return v1 - v2
+func decrease(v1 int) int {
+	return v1 - brightnessStep
 }

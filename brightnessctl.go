@@ -9,7 +9,6 @@ import (
 const (
 	backlightDevPath = "/sys/class/backlight"
 	brightnessParam  = "brightness"
-	brightnessStep   = 250 // fix the step for smaller changes
 )
 
 func check(err error) {
@@ -54,7 +53,7 @@ func writeValue(path string, value int) {
 	check(err)
 }
 
-func HandleBrightness(f func(int, int) int) {
+func HandleBrightness(f func(int) int) {
 	// Getting driver from sysfs
 	driver, err := getDriver(backlightDevPath)
 	check(err)
@@ -67,7 +66,7 @@ func HandleBrightness(f func(int, int) int) {
 
 	value := readValue(syspath)
 
-	newvalue := f(value, brightnessStep)
+	newvalue := f(value)
 
 	writeValue(syspath, newvalue)
 }
