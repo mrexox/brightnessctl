@@ -53,7 +53,19 @@ func writeValue(path string, value int) {
 	check(err)
 }
 
-func HandleBrightness(f func(int) int) {
+func DecreaseBrightness(step int) {
+	changeBrightness(func(brightness int) int {
+		return brightness + step
+	})
+}
+
+func IncreaseBrightness(step int) {
+	changeBrightness(func(brightness int) int {
+		return brightness - step
+	})
+}
+
+func changeBrightness(f func(int) int) {
 	// Getting driver from sysfs
 	driver, err := getDriver(backlightDevPath)
 	check(err)
