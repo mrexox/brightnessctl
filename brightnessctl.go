@@ -17,6 +17,36 @@ func check(err error) {
 	}
 }
 
+func DecreaseBrightness(step int) {
+	changeBrightness(func(brightness int) int {
+		return brightness + step
+	})
+}
+
+func IncreaseBrightness(step int) {
+	changeBrightness(func(brightness int) int {
+		return brightness - step
+	})
+}
+
+func changeBrightness(f func(int) int) {
+	// Getting driver from sysfs
+	driver, err := getDriver(backlightDevPath)
+	check(err)
+
+	syspath := concat(backlightDevPath,
+		"/",
+		driver,
+		"/",
+		brightnessParam)
+
+	value := readValue(syspath)
+
+	newvalue := f(value)
+
+	writeValue(syspath, newvalue)
+}
+
 func getDriver(sysfsPath string) (string, error) {
 	files, err := ioutil.ReadDir(sysfsPath)
 	check(err)
@@ -51,34 +81,4 @@ func writeValue(path string, value int) {
 
 	err := ioutil.WriteFile(path, strValue, 0644)
 	check(err)
-}
-
-func DecreaseBrightness(step int) {
-	changeBrightness(func(brightness int) int {
-		return brightness + step
-	})
-}
-
-func IncreaseBrightness(step int) {
-	changeBrightness(func(brightness int) int {
-		return brightness - step
-	})
-}
-
-func changeBrightness(f func(int) int) {
-	// Getting driver from sysfs
-	driver, err := getDriver(backlightDevPath)
-	check(err)
-
-	syspath := concat(backlightDevPath,
-		"/",
-		driver,
-		"/",
-		brightnessParam)
-
-	value := readValue(syspath)
-
-	newvalue := f(value)
-
-	writeValue(syspath, newvalue)
 }
