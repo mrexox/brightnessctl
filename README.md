@@ -1,5 +1,7 @@
 # brightnessctl
 
+[![Go](https://github.com/mrexox/brightnessctl/actions/workflows/go.yml/badge.svg)](https://github.com/mrexox/brightnessctl/actions/workflows/go.yml)
+
 A small utility to UP and DOWN the screen brightness (for laptops)
 
 :warning: :penguin: Linux only :warning:
