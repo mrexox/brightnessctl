@@ -1,0 +1,55 @@
+.TH brightnessctl 1 "March 28, 2021" "version 0.0.1" "USER COMMANDS"
+.SH NAME
+brightnessctl \- Brightness control utility for laptops
+.SH SYNOPSIS
+.B \fBbrightnessctl\fR
+\fIdirection\fR [\fIamount\fR]
+.SH DESCRIPTION
+\fBbrightnessctl\fR uses sysfs to read and write the settings.
+It will use the first device found in /sys/class/backlight.
+.SH OPTIONS
+.TP
+\fIdirection\fR
+\fBup\fR or \fBdown\fR
+.TP
+\fIamount\fR
+the amount of brightness to increase or decrease (the real effect depends on a device)
+.SH EXAMPLES
+.TP
+Increase brightness by 10
+.B brightnessctl
+up 10
+.PP
+.TP
+Decrease brightness
+.B brightnessctl
+down
+.PP
+.SH CONFIG EXAMPLES
+.TP
+.IB [Xbindkeys]
+.TP
+Add to your \fI~/.xbindkeysrc\fR:
+
+.nf
+"brightnessctl up 10"
+  XF86MonBrightnessUp
+
+"brightnessctl down 10"
+  XF86MonBrightnessDown
+.fi
+.PP
+.TP
+.IB [Spectrwm]
+.TP
+Add to your \fI~/.spectrwm.conf\fR:
+
+.nf
+program[br_up]          = brightnessctl up
+program[br_down]        = brightnessctl down
+
+bind[br_up]             = MOD+F6
+bind[br_down]           = MOD+F5
+.fi
+.SH AUTHOR
+Valentine Kiselev (mrexox (at) yahoo.com)
