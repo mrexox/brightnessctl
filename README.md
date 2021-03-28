@@ -19,13 +19,26 @@ Decrease brightness: `brightnessctl down` or `brightnessctl down 35`
 
 You can bind it in your lovely wm. For spectrwm it is like:
 
-*~/.spectrwm.conf*
+## Binding keys
+
+**~/.spectrwm.conf**
 ```
 program[br_up]          = brightnessctl up
 program[br_down]        = brightnessctl down
 
 bind[br_up]             = MOD+F6
 bind[br_down]           = MOD+F5
+```
+
+or despite the WM you use:
+
+**~/.xbindkeysrc**
+```
+"brightnessctl up 10"
+  XF86MonBrightnessUp
+
+"brightnessctl down 10"
+  XF86MonBrightnessDown
 ```
 
 ## Description
